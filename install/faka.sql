@@ -75,14 +75,14 @@ CREATE TABLE IF NOT EXISTS `t_config` (
 --
 
 INSERT INTO `t_config` (`id`, `catid`, `name`, `value`, `tag`, `lock`, `updatetime`) VALUES
-(1, 1, 'registerswitch', '0', '是否开放注册功能,1是开放,0是关闭', 1, 1453452674),
+(1, 1, 'registerswitch', '1', '是否开放注册功能,1是开放,0是关闭', 1, 1453452674),
 (2, 1, 'limitiporder', '3', '同一ip当日下单限制（针对未付款订单）,不限制请设置为0', 1, 1453452674),
 (3, 1, 'limitemailorder', '3', '同一email当日下单限制（针对未付款订单）,不限制请设置为0', 1, 1453452674),
 (4, 1, 'weburl', 'http://faka.zlkb.net', '当前网站地址,用于支付站点异步返回，务必修改正确', 1, 1453452674),
 (5, 1, 'adminemail', 'demo@demo.com', '管理员邮箱,用于接收邮件提醒用', 1, 1453452674),
 (6, 1, 'webname', 'ZFAKA平台', '当前站点名称', 1, 1453452674),
 (7, 1, 'webdescription', '本系统由资料空白开发并免费提供', '当前站点描述', 1, 1453452674),
-(8, 1, 'notice', '本系统商品均可正常购买。开源下载地址：github地址:&lt;a href=&quot;https://github.com/zlkbdotnet/zfaka/&quot; target=&quot;_blank&quot;&gt;https://github.com/zlkbdotnet/zfaka/&lt;/a&gt;', '首页公告', 1, 1453452674),
+(8, 1, 'notice', '本系统商品均可正常购买。', '首页公告', 1, 1453452674),
 (9, 1, 'ad', '&lt;image src=&quot;/res/images/pay/supportme.jpg&quot;&gt;', '购买页默认内容', 1, 1453452674),
 (10, 1, 'yzmswitch', '1', '验证码开关(1开，0关)', 1, 1453452674),
 (11, 1, 'orderinputtype', '2', '订单必填输入框选择: 1邮箱 2QQ', 1, 1453452674),
@@ -90,7 +90,7 @@ INSERT INTO `t_config` (`id`, `catid`, `name`, `value`, `tag`, `lock`, `updateti
 (14, 1, 'tongji', '<!--统计js-->', '统计脚本', 1, 1453452674),
 (15, 1, 'mprodcutdescriptionswitch', '0', '移动端商品详情，隐藏(0)|显示(1)', 1, 1453452674),
 (16, 1, 'orderprefix', 'zlkb', '订单前缀，只能是英文和数字,且长度不要超过5个字符串建议不要超过5个字符串', 1, 1453452674),
-(17, 1, 'backgroundimage', 'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/6a600c338744ebf894c9e667dff9d72a6059a72a.jpg', '前台背景图片地址', 1, 1453452674),
+(17, 1, 'backgroundimage', '', '前台背景图片地址', 1, 1453452674),
 (18, 1, 'headermenucolor', 'layui-bg-black', '前台顶部菜单配色方案', 1, 1453452674),
 (20, 1, 'layerad', '', '弹窗广告', 1, 1453452674),
 (21, 1, 'loginswitch', '1', '登录开关', 1, 1453452674),
