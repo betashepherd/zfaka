@@ -1,0 +1,126 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  namespace: zfaka
+  name: mysql-config
+data:
+  my.cnf: |
+    [client]
+    port		= 3306
+    default-character-set = utf8mb4
+
+    [mysqld_safe]
+    nice		= 0
+
+    [mysqld]
+    user		= mysql
+    port		= 3306
+    skip-host-cache
+    skip-name-resolve
+    back_log			= 500
+    max_connections		= 2000
+    max_connect_errors	= 9999999
+    table_open_cache	= 512
+    max_allowed_packet	= 16M
+    max_heap_table_size	= 64M
+    sort_buffer_size	= 8M
+    join_buffer_size	= 8M
+    thread_cache_size	= 64
+    innodb_thread_concurrency = 4
+    default-storage-engine = InnoDB
+
+    character-set-server = utf8mb4
+    collation-server = utf8mb4_unicode_ci
+    skip-character-set-client-handshake
+    init_connect='SET NAMES utf8mb4'
+
+    thread_stack		= 192K
+    transaction_isolation = REPEATABLE-READ
+    tmp_table_size		= 64M
+    table_open_cache	= 2048
+    datadir				= /var/lib/mysql
+    tmpdir				= /var/lib/mysql
+    explicit_defaults_for_timestamp
+    secure-file-priv=/var/lib/mysql-files
+
+    # *** log config***
+    slow_query_log
+    long_query_time		= 2
+    slow-query-log-file	= /var/lib/mysql/mysql.slow.log # 5.6+
+    log-queries-not-using_indexes
+
+    socket=/var/run/mysqld/mysqld.sock
+
+    # Disabling symbolic-links is recommended to prevent assorted security risks
+    symbolic-links=0
+
+    #log-error=/var/log/mysqld.log
+    pid-file=/var/run/mysqld/mysqld.pid
+    [client]
+    socket=/var/run/mysqld/mysqld.sock
+
+    [mysql]
+    no-auto-rehash
+    default-character-set = utf8mb4
+
+    !includedir /etc/mysql/conf.d/
+    !includedir /etc/mysql/mysql.conf.d/
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: zfaka
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  serviceName: mysql
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "123456"
+          image: mysql:5.7
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: database-vol
+              mountPath: /var/lib/mysql
+            - mountPath: /etc/my.cnf
+              subPath: my.cnf
+              name: mysql-config
+      volumes:
+        - name: database-vol
+          hostPath:
+            path: /data/mysql
+        - name: mysql-config
+          configMap:
+            name: mysql-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mysql
+  namespace: zfaka
+  name: mysql
+spec:
+  type: NodePort
+  ports:
+    - name: "tcp"
+      port: 3306
+      targetPort: 3306
+      nodePort: 32306
+  selector:
+    app: mysql
