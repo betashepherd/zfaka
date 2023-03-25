@@ -1,10 +1,10 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: zfaka
-  labels:
-    app: zfaka
+# ---
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: zfaka
+#   labels:
+#     app: zfaka
 
 ---
 kind: ConfigMap
