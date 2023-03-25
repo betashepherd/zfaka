@@ -107,7 +107,7 @@ spec:
     spec:
       containers:
         - name: php-fpm
-          image: ccr.ccs.tencentyun.com/fastapp/zfaka:v1.0.0.1962.1e941d27
+          image: ccr.ccs.tencentyun.com/fastapp/zfaka:v1.0.0.1960.efdd3933
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
@@ -143,7 +143,6 @@ spec:
                   - sh
                   - '-c'
                   - sleep 5 && /usr/sbin/nginx -s quit
-      #nodeName: bj-cpu082.aibee.cn
       volumes:
         - name: data-vol
           hostPath:
