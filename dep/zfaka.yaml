@@ -107,7 +107,7 @@ spec:
     spec:
       containers:
         - name: php-fpm
-          image: ccr.ccs.tencentyun.com/fastapp/zfaka:v1.0.0.1960.efdd3933
+          image: ccr.ccs.tencentyun.com/fastapp/zfaka:v1.0.0.1963.84623a91
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
@@ -148,8 +148,7 @@ spec:
           hostPath:
             path: /data
         - name: nginx-www
-          hostPath:
-            path: /data/www-data
+            emptyDir: {}
         - name: nginx-config
           configMap:
             name: nginx-config
