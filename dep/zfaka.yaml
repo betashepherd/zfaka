@@ -107,7 +107,7 @@ spec:
     spec:
       containers:
         - name: php-fpm
-          image: ccr.ccs.tencentyun.com/fastapp/zfaka:v1.0.0.1965.e970c016
+          image: ccr.ccs.tencentyun.com/fastapp/zfaka:v1.0.0.1966.ec78eb7f
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
